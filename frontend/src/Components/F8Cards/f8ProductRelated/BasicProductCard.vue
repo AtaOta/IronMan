@@ -78,12 +78,12 @@ export default {
 .Product_Card_Holder{
     grid-column: 2/ span 12;
     display: grid;
-    grid-template-columns: repeat(12, minmax(auto, 120px));
+    grid-template-columns: repeat(12, minmax(auto, 200px));
     grid-gap: 10px;
 }
 
 .product_Card{
-    grid-column-end: span 3;
+    grid-column-end: span 2;
     display: flex;
     flex-direction: column;
     background-color: #fff;
@@ -107,18 +107,20 @@ export default {
 
 /* <!-- Product Image Container --> */
 .Product_Image_Container{
-    width: 100%;
-    padding-top: 56.25%;
+    grid-column-end: span 3;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease 0.3s;
+    font-size: 14px;
+    height: 200px;
     overflow: hidden;
-    position: relative;
 }
 .Product_Image_Container img{
     width: 100%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    object-fit: cover;
+    height: 100%;
+    object-fit: contain;
     z-index: 0;
 }
 
@@ -128,6 +130,7 @@ export default {
     background-color: #0000007c;
     width: 5em;
     color: #fff;
+    transform: translateY(-15px);
 }
 
 
@@ -195,6 +198,10 @@ export default {
 
     .product_Card{
         grid-column-end: span 4;
+    }
+    /* <!-- Product Image Container --> */
+    .Product_Image_Container{
+        height: 140px;
     }
 }
 
