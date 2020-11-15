@@ -39,12 +39,41 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework',
 
+    'rest_framework',
+    'rest_framework.authtoken',
+    'corsheaders',
     'webpack_loader',
+
+    'Account.apps.AccountConfig',
+    'AboutUs.apps.AboutusConfig',
+    'AllProfile.apps.AllprofileConfig',
+    'products.apps.ProductsConfig',
+
+    'drf_yasg',  # For Development
 ]
 
+# ~~~~~~~~~~~~:~~~~~~~~~~~~[ Rest Framework Authentication Token ]~~~~~~~~~~~~:~~~~~~~~~~~~
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
+
+# ~~~~~~~~~~~~:~~~~~~~~~~~~[ Swagger Settings ]~~~~~~~~~~~~:~~~~~~~~~~~~
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
+    }
+}
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',   # This middle ware is permission accessing json data
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -105,6 +134,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+# ~~~~~~~~~~~~:~~~~~~~~~~~~[ For Creating Abstract Base User ]~~~~~~~~~~~~:~~~~~~~~~~~~
+AUTH_USER_MODEL = 'Account.User'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -118,10 +151,28 @@ USE_L10N = True
 
 USE_TZ = True
 
+# ~~~~~~~~~~~~:~~~~~~~~~~~~[ To Access this RestApi Data ]~~~~~~~~~~~~:~~~~~~~~~~~~
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = [
+    "http://127.0.0.1:8000",
+    "http://localhost:8080",
+]
+
 # ~~~~~~~~~~~~:~~~~~~~~~~~~[ Destination Of Image ]~~~~~~~~~~~~:~~~~~~~~~~~~
 IMAGE_STORE_AT = [
     "http://127.0.0.1:8000",
 ]
+
+
+# ~~~~~~~~~~~~:~~~~~~~~~~~~[ smtp Configuration ]~~~~~~~~~~~~:~~~~~~~~~~~~
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 
 # Static files (CSS, JavaScript, Images)

@@ -10,6 +10,7 @@ Compact/urls.production.py
 
 # Ignoring Media Directory
 media/Other
+media/products
 
 # Byte-compiled / optimized / DLL files
 **/__pycache__/
